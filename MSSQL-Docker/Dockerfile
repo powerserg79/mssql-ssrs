@@ -1,5 +1,5 @@
 # change this tag to be the same as your OS, very important
-FROM mcr.microsoft.com/windows/servercore:10.0.16299.1087-amd64
+FROM mcr.microsoft.com/windows/servercore:1809
 
 LABEL maintainer "Perry Skountrianos"
 
@@ -21,7 +21,7 @@ WORKDIR /
 RUN Invoke-WebRequest -Uri $env:box -OutFile SQL.box
 RUN Invoke-WebRequest -Uri $env:exe -OutFile SQL.exe
 RUN Start-Process -Wait -FilePath .\SQL.exe -ArgumentList /qs, /x:setup
-RUN .\setup\setup.exe /q /ACTION=Install /INSTANCENAME=MSSQLSERVER /FEATURES=SQLEngine /UPDATEENABLED=0 /SQLSVCACCOUNT='NT AUTHORITY\NETWORK SERVICE' /SQLSYSADMINACCOUNTS='BUILTIN\ADMINISTRATORS' /TCPENABLED=1 /NPENABLED=0 /IACCEPTSQLSERVERLICENSETERMS
+RUN .\setup\setup.exe /q /ACTION=Install /INSTANCENAME=MSSQLSERVER /FEATURES=SQLEngine /UPDATEENABLED=0 /SQLSVCACCOUNT='NT AUTHORITY\NETWORK SERVICE' /SQLSYSADMINACCOUNTS='BUILTIN\ADMINISTRATORS' /TCPENABLED=1 /NPENABLED=1 /IACCEPTSQLSERVERLICENSETERMS
 # RUN Remove-Item -Recurse -Force SQL.exe, SQL.box, setup
 
 RUN stop-service MSSQLSERVER ; \

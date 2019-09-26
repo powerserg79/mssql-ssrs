@@ -1,4 +1,4 @@
-FROM ss-mssql:angus
+FROM nanoserver-mssql:clean
 
 LABEL  Name=SSRS Version=0.0.4 maintainer="Geoff W"
 
